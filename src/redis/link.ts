@@ -36,10 +36,12 @@ export const addGroup = async (groupName: string) => {
 export const removeGroup = async (groupName: string) => {
     try {
         const response = await client.hDel("groupHash", groupName);
+        console.log(response);
         if (response == 0)
             return {
                 status: "failure",
                 service: "remove-group",
+                error: "Group Doesn't exists"
             };
 
         return {
@@ -109,6 +111,12 @@ export const removeLinkFromGroup = async (groupName: string, label: string) => {
             groupName,
             JSON.stringify(parsedGroups.filter((item: Link) => item.label != label))
         );
+
+        if (response == 0) return {
+            status: "failure",
+            error: "Link doesn't exists"
+        }
+        
         if (response == null)
             return {
                 status: "failure",

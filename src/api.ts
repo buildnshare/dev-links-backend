@@ -33,7 +33,9 @@ AppRouter.delete('/group/:groupName', async (req, res) => {
         const { groupName } = req.params as { groupName: string };
         if (!groupName) return res.status(400).send("Bad data, no group name")
         const response = await removeGroup(groupName);
-        if (response.status === "failure") return res.status(500).send({ error: response.error })
+        if (response.status === "failure" && response.error === "Group Doesn't exists")
+            return res.status(404).send({ error: response.error })
+        else if (response.status === "failure") return res.status(500).send({ error: response.error })
         return res.status(200).send(response);
     } catch (err) {
         console.error(err);
@@ -84,6 +86,7 @@ AppRouter.post('/link', async (req, res) => {
         })
 
         const response = await addLinkToGroup(data.group, { label: data.label, link: data.link });
+        if (response.status === "failure" && response.error === 'link already exists') return res.status(400).send({ error: response.error })
         if (response.status === "failure") return res.status(500).send({ error: response.error })
         return res.status(200).send(response);
     } catch (err) {
@@ -96,7 +99,8 @@ AppRouter.delete('/link/:group/:label', async (req, res) => {
     try {
         const { group, label } = req.params as { group: string, label: string }
         const response = await removeLinkFromGroup(group, label);
-        if (response.status === "failure") return res.status(500).send({ error: response.error })
+        if (response.status === "failure" && response.error === "Link doesn't exists") return res.status(404).send({ error: response.error })
+        else if (response.status === "failure") return res.status(500).send({ error: response.error })
         return res.status(200).send(response);
     } catch (err) {
         console.error(err);
