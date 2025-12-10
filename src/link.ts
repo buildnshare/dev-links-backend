@@ -1,4 +1,3 @@
-import { isEqual } from "lodash";
 import { client } from "./client";
 import { ErrorMessage, SuccessMessage, type Link } from "./utils";
 
