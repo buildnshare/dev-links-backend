@@ -111,7 +111,7 @@ export const showLinksInGroup = async (groupName: string) => {
         const groupLinkData = searchResult.map((item) => {
             return {
                 groupName: item[0],
-                ...JSON.parse(item[1])
+                links: JSON.parse(item[1])
             }
         });
         return { data: groupLinkData };

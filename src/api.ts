@@ -7,7 +7,7 @@ AppRouter.get('/group', async (req, res) => {
     try {
         const response = await showGroups();
         if (response && response.error) return res.status(500).send(response)
-        return res.status(200).send(response.data);
+        return res.status(200).send(response);
     } catch (err) {
         console.error(err);
         const message = err instanceof Error ? err.message : 'unexpected error';
