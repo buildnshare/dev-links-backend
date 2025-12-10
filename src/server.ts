@@ -1,7 +1,7 @@
 import express from 'express'
 import cors from 'cors';
 import AppRouter from './api';
-import { connectRedis } from './redis/client';
+import { connectRedis } from './client';
 import config from '../config';
 
 const appBaseUrl = `${config.server.protocol}://${config.server.host}:${config.server.port}/`;

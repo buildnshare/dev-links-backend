@@ -1,6 +1,7 @@
 
 import { createClient } from 'redis';
-import config from '../../config'
+import config from '../config'
+import { ErrorMessage } from './utils';
 
 export const client = createClient({
     username: config.redis.username,
@@ -11,7 +12,7 @@ export const client = createClient({
     }
 });
 
-client.on('error', err => console.log('Redis Client Error', err));
+client.on('error', err => console.error(ErrorMessage.REDIS_CLIENT_ERROR, err));
 
 export const connectRedis = async () => {
     try {
