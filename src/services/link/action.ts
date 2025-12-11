@@ -1,5 +1,5 @@
-import { client } from "./client";
-import { ErrorMessage, SuccessMessage, type Link } from "./utils";
+import { client } from "../../redis-client";
+import { ErrorMessage, SuccessMessage, type Link } from "../../utils/enum-types";
 
 export const checkGroupExists = async (group: string) => {
     try {

@@ -1,9 +1,9 @@
 import express from 'express';
-import { addGroup, addLinkToGroup, removeGroup, removeLinkFromGroup, showGroups, showLinksByLabelOrGroup, showLinksInGroup } from './link';
+import { addGroup, addLinkToGroup, removeGroup, removeLinkFromGroup, showGroups, showLinksByLabelOrGroup, showLinksInGroup } from './action';
 
-const AppRouter = express.Router()
+const LinkRouter = express.Router()
 
-AppRouter.get('/group', async (req, res) => {
+LinkRouter.get('/group', async (req, res) => {
     try {
         const response = await showGroups();
         if (response && response.error) return res.status(500).send(response)
@@ -15,7 +15,7 @@ AppRouter.get('/group', async (req, res) => {
     }
 })
 
-AppRouter.post('/group', async (req, res) => {
+LinkRouter.post('/group', async (req, res) => {
     try {
         const { groupName } = req.body;
         if (!groupName) return res.status(400).send("Bad data, no group name")
@@ -29,7 +29,7 @@ AppRouter.post('/group', async (req, res) => {
     }
 })
 
-AppRouter.delete('/group/:groupName', async (req, res) => {
+LinkRouter.delete('/group/:groupName', async (req, res) => {
     try {
         const { groupName } = req.params as { groupName: string };
         if (!groupName) return res.status(400).send("Bad data, no group name")
@@ -43,7 +43,7 @@ AppRouter.delete('/group/:groupName', async (req, res) => {
     }
 })
 
-AppRouter.get('/group/:groupName/link', async (req, res) => {
+LinkRouter.get('/group/:groupName/link', async (req, res) => {
     try {
         const { groupName } = req.params;
         if (!groupName) return res.status(400).send("Bad data, no group name")
@@ -57,7 +57,7 @@ AppRouter.get('/group/:groupName/link', async (req, res) => {
     }
 })
 
-AppRouter.get('/link', async (req, res) => {
+LinkRouter.get('/link', async (req, res) => {
     try {
         const { label, group } = req.query;
         if (!label) return res.status(400).send("Bad data, no label provided")
@@ -70,7 +70,7 @@ AppRouter.get('/link', async (req, res) => {
         return res.status(500).send({ error: message })
     }
 })
-AppRouter.post('/link', async (req, res) => {
+LinkRouter.post('/link', async (req, res) => {
     try {
         const data = req.body;
 
@@ -94,7 +94,7 @@ AppRouter.post('/link', async (req, res) => {
     }
 })
   
-AppRouter.delete('/link/:group/:label', async (req, res) => {
+LinkRouter.delete('/link/:group/:label', async (req, res) => {
     try {
         const { group, label } = req.params as { group: string, label: string }
         const response = await removeLinkFromGroup(group, label);
@@ -107,4 +107,4 @@ AppRouter.delete('/link/:group/:label', async (req, res) => {
     }
 })
 
-export default AppRouter;
+export default LinkRouter;

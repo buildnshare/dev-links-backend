@@ -1,7 +1,7 @@
 
 import { createClient } from 'redis';
 import config from '../config'
-import { ErrorMessage } from './utils';
+import { ErrorMessage } from './utils/enum-types';
 
 export const client = createClient({
     username: config.redis.username,
