@@ -93,6 +93,7 @@ AppRouter.post('/link', async (req, res) => {
         return res.status(500).send({ error: message })
     }
 })
+  
 AppRouter.delete('/link/:group/:label', async (req, res) => {
     try {
         const { group, label } = req.params as { group: string, label: string }
