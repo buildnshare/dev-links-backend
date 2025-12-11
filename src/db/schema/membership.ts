@@ -23,4 +23,4 @@ const MembershipSchema = new Schema({
 // IMPORTANT: Create a unique compound index to ensure a user can only have ONE role per group
 MembershipSchema.index({ userId: 1, groupId: 1 }, { unique: true });
 
-module.exports = mongoose.model('Membership', MembershipSchema);
+export const MemberShipModel =  mongoose.model('Membership', MembershipSchema);

@@ -35,4 +35,4 @@ const UserSchema = new Schema({
     }
 }, { timestamps: { createdAt: 'joinedAt', updatedAt: 'updatedAt' } }); // Use Mongoose timestamps feature
 
-module.exports = mongoose.model('User', UserSchema);
+export const UserModel = mongoose.model('User', UserSchema);

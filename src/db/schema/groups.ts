@@ -14,4 +14,4 @@ const GroupSchema = new Schema({
     }
 }, { timestamps: true }); // Uses default 'createdAt' and 'updatedAt' fields
 
-module.exports = mongoose.model('Group', GroupSchema);
+export const GroupModel =  mongoose.model('Group', GroupSchema);

@@ -9,11 +9,13 @@ import AuthRouter from './services/auth/api';
 const appBaseUrl = `${config.server.protocol}://${config.server.host}:${config.server.port}/`;
 
 const app = express();
-await startMongoClient();
-await connectRedis();
 
 app.use(express.json())
 app.use(cors())
+app.use(express.urlencoded({ extended: true }))
+
+await startMongoClient();
+await connectRedis();
 
 app.use('/api', LinkRouter);
 app.use('/auth', AuthRouter)
